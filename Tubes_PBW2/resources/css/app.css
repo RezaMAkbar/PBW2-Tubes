@@ -1,3 +1,7 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.custom-background-color {
+    background-color: #554dff;
+}
