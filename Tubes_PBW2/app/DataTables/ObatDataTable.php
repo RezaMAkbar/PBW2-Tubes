@@ -2,8 +2,11 @@
 
 namespace App\DataTables;
 
+use App\Models\Image;
 use App\Models\Obat;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -22,8 +25,22 @@ class ObatDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'obat.action')
-            ->setRowId('id');
+            ->editColumn('action', function ($obat) {
+                return '<a href="/editObat/' . $obat->id . '" class="btn btn-primary">Edit</a>';
+            }) //edit column so that the button is shown
+            ->addColumn('image', function ($obat) {
+                // Fetch images for the meds
+                $images = Image::where('id_obat', $obat->id)->get();
+
+                $html = '';
+                foreach ($images as $image) {
+                    $html .= '<img src=" storage/' . $image->path . '" border="0" width="40" class="img-rounded" align="center" />';
+                }
+
+                return $html;
+            })
+            ->setRowId('id')
+            ->rawColumns(['action', 'image']); //for the image and button
     }
 
     /**
@@ -31,7 +48,16 @@ class ObatDataTable extends DataTable
      */
     public function query(Obat $model): QueryBuilder
     {
-        return $model->from('obat')->select('*'); //specify the table name because naming conventions will cause error
+        return $model->newQuery()->select([
+            'obat.id',
+            'obat.nama_obat',
+            DB::raw("DATE_FORMAT(obat.tanggal_masuk, '%d-%m-%Y') as tanggal_masuk"),
+            'obat.stock',
+            'obat.harga',
+            DB::raw("DATE_FORMAT(obat.expired, '%d-%m-%Y') as expired"),
+            'obat.no_batch',
+            DB::raw('(SELECT stok_opname.tempat_simpan FROM stok_opname WHERE stok_opname.id_obat = obat.id) as tempat_simpan'),
+        ]);
     }
 
     /**
@@ -68,6 +94,12 @@ class ObatDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id'),
+            Column::computed('image')
+            ->title('Image')
+            ->exportable(false)
+            ->printable(false)
+            ->width(100)
+            ->addClass('text-center'),
             Column::make('nama_obat'),
             Column::make('stock'),
             Column::make('harga'),
@@ -75,6 +107,7 @@ class ObatDataTable extends DataTable
                 ->title('Tanggal Masuk'),
             Column::make('expired'),
             Column::make('no_batch'),
+            Column::make('tempat_simpan'),
         ];
     }
 

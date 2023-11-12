@@ -16,3 +16,13 @@
 .custom-background-color {
     background-color: #554dff;
 }
+
+.non-clickable {
+    pointer-events: none;
+    user-select: none;
+    color: #e0e0e0; /* Adjust the color to indicate it's not clickable if needed*/
+}
+
+.dropdown-item.active {
+    color: blue; /* Adjust the color if needed*/
+}
