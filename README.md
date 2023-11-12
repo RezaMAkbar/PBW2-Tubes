@@ -28,3 +28,6 @@ kalo datatables di scss
 .custom-background-color {
     background-color: ##5ee4ff;
 }
+
+
+migration file di pindahkan ke backup
