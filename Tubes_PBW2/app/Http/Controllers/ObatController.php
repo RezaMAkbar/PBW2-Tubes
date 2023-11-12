@@ -23,6 +23,7 @@ class ObatController extends Controller
     public function create()
     {
         //
+        return view('obat.tambahObat');
     }
 
     /**
@@ -31,6 +32,27 @@ class ObatController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nama_obat' => ['required', 'string'],
+            'stock' => ['required', 'integer'],
+            'harga' => ['required', 'integer'],
+            'tanggal_masuk' => ['required', 'date'],
+            'expired' => ['required', 'date'],
+            'no_batch' => ['required', 'string'],
+        ]);
+    
+       
+        Obat::create([
+            'nama_obat' => $request->nama_obat,
+            'stock' => $request->stock,
+            'harga' => $request->harga,
+            'tanggal_masuk' => $request->tanggal_masuk,
+            'expired' => $request->expired,
+            'no_batch' => $request->no_batch,
+        ]);
+    
+        
+        return redirect('/dashboard');
     }
 
     /**

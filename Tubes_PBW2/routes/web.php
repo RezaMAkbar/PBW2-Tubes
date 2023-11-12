@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\DetailPenerimaanController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
+use App\Models\DetailPenerimaan;
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,10 +32,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
+
+    Route::get('/tambahObat', [ObatController::class, 'create'])->name('obat.tambahObat');
+    Route::post('/storeObat', [ObatController::class, 'store'])->name('obat.storeObat');
     Route::get('/editObat/{obat}', [ObatController::class, 'show'])->name('obat.editObat');
     Route::post('/updateObat', [ObatController::class, 'update'])->name('obat.updateObat');
     Route::post('/deleteObat', [ObatController::class, 'destroy'])->name('obat.deleteObat');
-    
+    Route::get('/transaksi', [DetailPenerimaanController::class, 'create'])->name('transaksi.transaksiObat');
+    Route::post('/transaksiStoreBeli', [DetailPenerimaanController::class, 'store'])->name('transaksi.storeBeliTransaksi');
+    Route::post('/transaksiStoreJual', [DetailPenerimaanController::class, 'store'])->name('transaksi.storeJualTransaksi');
 });
 
 require __DIR__.'/auth.php';

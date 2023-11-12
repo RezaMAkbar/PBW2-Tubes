@@ -30,4 +30,4 @@ kalo datatables di scss
 }
 
 
-migration file di pindahkan ke backup
+migration file di pindahkan ke backup, transaksi jual belum
