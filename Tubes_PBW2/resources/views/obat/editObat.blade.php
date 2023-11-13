@@ -23,9 +23,9 @@
                         <!-- Field for update -->
                         <div id="updateSection" class="update-section">
                             <div class="row mb-3">
-                                <label for="id" class="col-md-4 col-form-label text-md-end">{{ __('ID') }}</label>
+                                <label for="id_obat" class="col-md-4 col-form-label text-md-end">{{ __('ID') }}</label>
                                 <div class="col-md-6">
-                                    <input id="id" type="text" class="form-control @error('id') is-invalid @enderror" name="id" value="{{ $obat->id }}" readonly>
+                                    <input id="id_obat" type="text" class="form-control @error('id_obat') is-invalid @enderror" name="id_obat" value="{{ $obat->id }}" readonly>
                                 </div>
                             </div>
 
@@ -71,12 +71,6 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
-                                <label for="tempat_simpan" class="col-md-4 col-form-label text-md-end">{{ __('Tempat Simpan Obat') }}</label>
-                                <div class="col-md-6">
-                                    <input id="tempat_simpan" type="text" class="form-control" name="tempat_simpan" value="{{ $obat->tempat_simpan }}">
-                                </div>
-                            </div>
 
                             <div class="row mb-3">
                                 <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Image') }}</label>

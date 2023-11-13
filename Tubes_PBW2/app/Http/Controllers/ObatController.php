@@ -77,10 +77,11 @@ class ObatController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Obat $obat)
+    public function update(Request $request)
     {
         //
         $request->validate([
+            'id_obat' => ['required', 'integer'],
             'nama_obat' => ['required', 'string'],
             'stock' => ['required', 'integer'],
             'harga' => ['required', 'integer'],
@@ -90,11 +91,11 @@ class ObatController extends Controller
             'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'] // Validation rules for image
     ]);
 
-    $obat = Obat::find($request->id);
+    $obat = Obat::find($request->id_obat);
 
     if ($obat) {
         if ($request->hasFile('image')) {
-            // Check if an existing image for that meds (uses obat.id)
+            // Check if there's an existing image for that meds (uses obat.id)
             if ($obat->images->isNotEmpty()) {
                 // update the existing image If image exists
                 $existingImage = $obat->images->first();
@@ -119,7 +120,7 @@ class ObatController extends Controller
             }
         }
 
-    Obat::where('id', $request->id)
+    Obat::where('id', $request->id_obat)
         ->update([
             'nama_obat' => $request->nama_obat,
             'stock' => $request->stock,

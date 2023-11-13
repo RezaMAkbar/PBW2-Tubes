@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailPenerimaan;
+use App\Models\Log;
 use App\Models\Obat;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -55,6 +56,12 @@ class DetailPenerimaanController extends Controller
             'id_obat' => $request->id_obat,
             'stock_masuk' => $request->stock_masuk,
         ]);
+
+        Log::create([
+            'tipe' => 'penerimaan',
+            'id_obat' => $request->id_obat,
+        ]);
+    
     
         
         return redirect('/dashboard');

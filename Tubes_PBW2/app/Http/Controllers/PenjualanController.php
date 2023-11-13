@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Obat;
 use App\Models\Penjualan;
 use App\Models\User;
@@ -51,7 +52,11 @@ class PenjualanController extends Controller
             'id_obat' => $request->id_obat,
             'total_barang' => $request->total_barang,
         ]);
-    
+
+        Log::create([
+            'tipe' => 'penjualan',
+            'id_obat' => $request->id_obat,
+        ]);
         
         return redirect('/dashboard');
     }

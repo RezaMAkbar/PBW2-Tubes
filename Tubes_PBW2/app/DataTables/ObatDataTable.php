@@ -107,7 +107,7 @@ class ObatDataTable extends DataTable
                 ->title('Tanggal Masuk'),
             Column::make('expired'),
             Column::make('no_batch'),
-            Column::make('tempat_simpan'),
+          //  Column::make('tempat_simpan'),
         ];
     }
 
