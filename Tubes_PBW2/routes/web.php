@@ -46,6 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/about', function () {
         return view('about');
     })->name('about');
+    Route::get('/stockOpname', function () {
+        return view('stockOpname.viewStockOpname');
+    })->name('viewStockOpname');
 });
 
 require __DIR__.'/auth.php';

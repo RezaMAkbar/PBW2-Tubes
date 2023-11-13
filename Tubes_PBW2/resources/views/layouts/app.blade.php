@@ -77,6 +77,7 @@
                                     <!-- hanya untuk testing<a  class="dropdown-item {{ request()->routeIs('users.index') ? 'active' : '' }}" href="{{ route('users.index') }}">{{ __('Users') }}</a> -->
                                     <a class="dropdown-item {{ request()->routeIs('transaksi.transaksiObat') ? 'active' : '' }}" href="{{ route('transaksi.transaksiObat') }}">{{ __('Transaksi') }}</a>
                                     <a class="dropdown-item {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">{{ __('About') }}</a>
+                                    <a class="dropdown-item {{ request()->routeIs('viewStockOpname') ? 'active' : '' }}" href="{{ route('viewStockOpname') }}">{{ __('stockOpname.viewStockOpname') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
