@@ -31,3 +31,6 @@ kalo datatables di scss
 
 
 migration file di pindahkan ke backup, transaksi jual belum
+
+
+expired date buat di edit stok opname di ambil dari obat
