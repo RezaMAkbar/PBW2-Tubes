@@ -25,7 +25,8 @@ class DetailPenerimaanController extends Controller
         //
         $usernames = User::pluck('username')->toArray(); //fetch username from users
         $obatIds = Obat::pluck('id');
-        return view("transaksi.transaksiObat")->with(['usernames' => $usernames, 'obatIds' => $obatIds]);
+        $obatNames = Obat::pluck('nama_obat');
+        return view("transaksi.transaksiObat")->with(['usernames' => $usernames, 'obatIds' => $obatIds,  'obatNames' => $obatNames]);
     }
 
     /**
@@ -36,10 +37,10 @@ class DetailPenerimaanController extends Controller
         //
         $request->validate([
             'no_nota' => ['required', 'string'],
-            'username' => ['required', 'string'],
+            'usernamePenerimaan' => ['required', 'string'],
             'tanggal' => ['required', 'date'],
             'harga_beli' => ['required', 'integer'],
-            'total_harga' => ['required', 'integer'],
+            'total_harga_penerimaan' => ['required', 'integer'],
             'id_obat' => ['required', 'integer'],
             'stock_masuk' => ['required', 'integer'],
         ]);
@@ -47,10 +48,10 @@ class DetailPenerimaanController extends Controller
        
         DetailPenerimaan::create([
             'no_nota' => $request->no_nota,
-            'username' => $request->username,
+            'username' => $request->usernamePenerimaan,
             'tanggal' => $request->tanggal,
             'harga_beli' => $request->harga_beli,
-            'total_harga' => $request->total_harga,
+            'total_harga' => $request->total_harga_penerimaan,
             'id_obat' => $request->id_obat,
             'stock_masuk' => $request->stock_masuk,
         ]);

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DetailPenerimaanController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use App\Models\DetailPenerimaan;
@@ -39,8 +40,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/updateObat', [ObatController::class, 'update'])->name('obat.updateObat');
     Route::post('/deleteObat', [ObatController::class, 'destroy'])->name('obat.deleteObat');
     Route::get('/transaksi', [DetailPenerimaanController::class, 'create'])->name('transaksi.transaksiObat');
-    Route::post('/transaksiStoreBeli', [DetailPenerimaanController::class, 'store'])->name('transaksi.storeBeliTransaksi');
-    Route::post('/transaksiStoreJual', [DetailPenerimaanController::class, 'store'])->name('transaksi.storeJualTransaksi');
+    Route::post('/transaksiBeli', [DetailPenerimaanController::class, 'store'])->name('transaksi.storeTerima');
+
+
+    Route::post('/transaksiJual', [PenjualanController::class, 'store'])->name('transaksi.storeJual');
 
 
     Route::get('/about', function () {

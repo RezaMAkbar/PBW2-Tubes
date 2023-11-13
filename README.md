@@ -34,3 +34,9 @@ migration file di pindahkan ke backup, transaksi jual belum
 
 
 expired date buat di edit stok opname di ambil dari obat
+
+
+
+
+jika ada field dengan id yg sama contoh di transaksiObat.blade
+harus di bedakan id nya, dan ubah di controller untuk menyamakan  id yg diubah tsb
