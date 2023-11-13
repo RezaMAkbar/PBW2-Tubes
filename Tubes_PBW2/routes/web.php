@@ -41,6 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/transaksi', [DetailPenerimaanController::class, 'create'])->name('transaksi.transaksiObat');
     Route::post('/transaksiStoreBeli', [DetailPenerimaanController::class, 'store'])->name('transaksi.storeBeliTransaksi');
     Route::post('/transaksiStoreJual', [DetailPenerimaanController::class, 'store'])->name('transaksi.storeJualTransaksi');
+
+
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
 });
 
 require __DIR__.'/auth.php';
