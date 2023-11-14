@@ -73,9 +73,15 @@
 
 
                             <div class="row mb-3">
-                                <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Image') }}</label>
+                                <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Image (Max file size: 2MB)') }}</label>
                                 <div class="col-md-6">
-                                    <input id="image" type="file" class="form-control" name="image">
+                                    <input id="image" type="file" class="form-control" name="image" accept=".jpg, .png, .jpeg, .gif" placeholder="Max file size: 2MB">
+                                    @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
                                 </div>
                             </div>
 

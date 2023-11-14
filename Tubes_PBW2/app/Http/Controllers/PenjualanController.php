@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Log;
+use App\Models\LogTransaksi;
 use App\Models\Obat;
 use App\Models\Penjualan;
 use App\Models\User;
@@ -45,7 +46,7 @@ class PenjualanController extends Controller
         ]);
     
        
-        Penjualan::create([
+        $penjualan = Penjualan::create([
             'username' => $request->usernamePenjualan,
             'tanggal_transaksi' => $request->tanggal_transaksi,
             'total_harga' => $request->total_harga_penjualan,
@@ -53,9 +54,10 @@ class PenjualanController extends Controller
             'total_barang' => $request->total_barang,
         ]);
 
-        Log::create([
+        LogTransaksi::create([
             'tipe' => 'penjualan',
             'id_obat' => $request->id_obat,
+            'id_penjualan' => $penjualan->id,
         ]);
         
         return redirect('/dashboard');

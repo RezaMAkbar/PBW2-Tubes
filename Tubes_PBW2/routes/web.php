@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\DetailPenerimaanController;
+use App\Http\Controllers\LogTransaksiController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use App\Models\DetailPenerimaan;
+use App\Models\LogTransaksi;
 use App\Models\Transaksi;
 use Illuminate\Support\Facades\Route;
 
@@ -41,10 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/deleteObat', [ObatController::class, 'destroy'])->name('obat.deleteObat');
     Route::get('/transaksi', [DetailPenerimaanController::class, 'create'])->name('transaksi.transaksiObat');
     Route::post('/transaksiBeli', [DetailPenerimaanController::class, 'store'])->name('transaksi.storeTerima');
-
-
     Route::post('/transaksiJual', [PenjualanController::class, 'store'])->name('transaksi.storeJual');
-
+    Route::get('/logTransaksi', [LogTransaksiController::class, 'index'])->name('log.logTransaksi');
 
     Route::get('/about', function () {
         return view('about');

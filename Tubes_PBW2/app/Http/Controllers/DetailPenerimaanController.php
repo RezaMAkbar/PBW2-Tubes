@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailPenerimaan;
-use App\Models\Log;
+use App\Models\LogTransaksi;
 use App\Models\Obat;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -47,7 +47,7 @@ class DetailPenerimaanController extends Controller
         ]);
     
        
-        DetailPenerimaan::create([
+        $penerimaan = DetailPenerimaan::create([
             'no_nota' => $request->no_nota,
             'username' => $request->usernamePenerimaan,
             'tanggal' => $request->tanggal,
@@ -57,9 +57,10 @@ class DetailPenerimaanController extends Controller
             'stock_masuk' => $request->stock_masuk,
         ]);
 
-        Log::create([
+        LogTransaksi::create([
             'tipe' => 'penerimaan',
             'id_obat' => $request->id_obat,
+            'id_penerimaan'=> $penerimaan->id,
         ]);
     
     
