@@ -22,7 +22,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-xl navbar-light custom-background-color shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand text" href="{{ url('/') }}">
                     Medtrack
                 </a>
 
@@ -97,11 +97,12 @@
                 </div>
             </div>
         </nav>
+    </div>
 
-        <main class="py-4">
+        <main class="{{ request()->is('about') ? '' : 'py-4' }}">
             @yield('content')
         </main>
-    </div>
+   
     @stack('scripts')
 </body>
 </html>
