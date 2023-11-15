@@ -5,6 +5,8 @@ use App\Http\Controllers\LogTransaksiController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StockOpname;
+use App\Http\Controllers\StokOpnameController;
 use App\Http\Controllers\UsersController;
 use App\Models\DetailPenerimaan;
 use App\Models\LogTransaksi;
@@ -46,12 +48,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/transaksiJual', [PenjualanController::class, 'store'])->name('transaksi.storeJual');
     Route::get('/logTransaksi', [LogTransaksiController::class, 'index'])->name('log.logTransaksi');
 
+    Route::get('/stockOpname', [StokOpnameController::class, 'index'])->name('viewStockOpname');
+
     Route::get('/about', function () {
         return view('about');
     })->name('about');
-    Route::get('/stockOpname', function () {
-        return view('stockOpname.viewStockOpname');
-    })->name('viewStockOpname');
+    // Route::get('/stockOpname', function () {
+    //     return view('stockOpname.viewStockOpname');
+    // })->name('viewStockOpname');
 });
 
 require __DIR__.'/auth.php';
