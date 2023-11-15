@@ -1,0 +1,373 @@
+.frame-ui-homeabout-frame-ui-homeabout {
+    width: 100%;
+    height: 1080px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-color: transparent;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  .frame-ui-homeabout-text {
+    top: 286px;
+    left: 810px;
+    color: rgba(255, 255, 255, 1);
+    height: auto;
+    position: absolute;
+    font-size: 100px;
+    align-self: auto;
+    font-style: Regular;
+    text-align: left;
+    font-family: Histora Beralin;
+    font-weight: 400;
+    line-height: 0%;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .frame-ui-homeabout-text05 {
+    top: 331px;
+    left: 331px;
+    color: rgba(255, 255, 255, 1);
+    width: 295px;
+    height: auto;
+    position: absolute;
+    font-size: 20px;
+    align-self: auto;
+    font-style: Regular;
+    text-align: left;
+    font-family: Raleway;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .frame-ui-homeabout-vector63 {
+    top: 0px;
+    left: 0px;
+    width: 959px;
+    height: 1080px;
+    position: absolute;
+  }
+  .frame-ui-homeabout-vector64 {
+    top: 0px;
+    right: -28px;
+    width: 1002px;
+    height: 1097px;
+    position: absolute;
+  }
+  .frame-ui-homeabout-text07 {
+    top: 50px;
+    left: 319px;
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    position: absolute;
+    font-size: 32px;
+    align-self: auto;
+    font-style: Regular;
+    text-align: left;
+    font-family: Raleway;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .frame-ui-homeabout-text09 {
+    top: 218px;
+    color: rgba(255, 255, 255, 1);
+    right: 194px;
+    width: 597px;
+    height: auto;
+    position: absolute;
+    font-size: 30px;
+    align-self: auto;
+    font-style: Regular;
+    text-align: left;
+    font-family: Raleway;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .frame-ui-homeabout-text11 {
+    top: 218px;
+    left: 237px;
+    color: rgba(255, 255, 255, 1);
+    width: 597px;
+    height: auto;
+    position: absolute;
+    font-size: 32px;
+    align-self: auto;
+    font-style: Regular;
+    text-align: left;
+    font-family: Raleway;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+  .frame-ui-homeabout-rectangle15 {
+    top: 50px;
+    left: 700px;
+    width: 472px;
+    height: 30px;
+    position: absolute;
+    border-color: rgba(0, 0, 0, 1);
+    border-style: solid;
+    border-width: 0.5px;
+    border-radius: 20px;
+  }
+  .frame-ui-homeabout-rectangle16 {
+    top: 50px;
+    left: 1177px;
+    width: 41px;
+    height: 30px;
+    position: absolute;
+    border-color: transparent;
+    border-radius: 20px;
+  }
+  .frame-ui-homeabout-group11 {
+    top: 49px;
+    left: 1574px;
+    width: 64px;
+    height: 23px;
+    display: flex;
+    padding: 0;
+    position: absolute;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: transparent;
+  }
+  .frame-ui-homeabout-text13 {
+    color: rgba(255, 255, 255, 1);
+    height: auto;
+    position: absolute;
+    font-size: 20px;
+    align-self: auto;
+    box-shadow: 0px 4px 4px 0px rgba(63, 75, 139, 0.20000000298023224) ;
+    font-style: SemiBold;
+    text-align: left;
+    font-family: Raleway;
+    font-weight: 600;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame-ui-homeabout-group12 {
+    top: 50px;
+    left: 1700px;
+    width: 76px;
+    height: 23px;
+    display: flex;
+    padding: 0;
+    position: absolute;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: transparent;
+  }
+  .frame-ui-homeabout-text15 {
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    position: absolute;
+    font-size: 20px;
+    align-self: auto;
+    box-shadow: 0px 4px 4px 0px rgba(63, 75, 139, 0.20000000298023224) ;
+    font-style: SemiBold;
+    text-align: left;
+    font-family: Raleway;
+    font-weight: 600;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame-ui-homeabout-search {
+    top: 55px;
+    left: 1187px;
+    width: 21px;
+    height: 21px;
+    position: absolute;
+  }
+  .frame-ui-homeabout-pexelsdarialiudnaya7354480removebgpreview1 {
+    left: 445px;
+    width: 1099px;
+    bottom: -7px;
+    height: 732px;
+    position: absolute;
+    border-color: transparent;
+  }
+  .frame-ui-homeabout-vector {
+    top: 95px;
+    left: 93px;
+    width: 60px;
+    height: 40px;
+    position: absolute;
+  }
+  .frame-ui-homeabout-group6 {
+    top: 175px;
+    left: 877px;
+    width: 166px;
+    height: 111px;
+    display: flex;
+    padding: 0;
+    position: absolute;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0;
+    margin-right: 0;
+    border-radius: 0px 0px 0px 0px;
+    margin-bottom: 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: transparent;
+  }
+  .frame-ui-homeabout-frameiconplus {
+    top: 8.8251953125px;
+    left: 73.3975830078125px;
+    width: 19.642967224121094px;
+    height: 19px;
+    display: flex;
+    padding: 0;
+    position: absolute;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0;
+    border-radius: 0px 0px 0px 0px;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: transparent;
+  }
+  .frame-ui-homeabout-vector1 {
+    top: 0px;
+    left: 0px;
+    width: 20px;
+    height: 19px;
+    position: absolute;
+  }
+  .frame-ui-homeabout-frameiconmapmarker {
+    top: 0px;
+    left: 64px;
+    width: 38.11898422241211px;
+    height: 50.8253173828125px;
+    display: flex;
+    padding: 0;
+    position: absolute;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0;
+    border-radius: 0px 0px 0px 0px;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: transparent;
+  }
+  .frame-ui-homeabout-vector2 {
+    top: 0px;
+    left: 0px;
+    width: 38px;
+    height: 51px;
+    position: absolute;
+  }
+  .frame-ui-homeabout-group2 {
+    top: 51px;
+    left: 0px;
+    width: 166px;
+    height: 60px;
+    display: flex;
+    padding: 0;
+    position: absolute;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0;
+    border-radius: 0px 0px 0px 0px;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: transparent;
+  }
+  .frame-ui-homeabout-text17 {
+    color: rgba(255, 255, 255, 1);
+    height: auto;
+    position: absolute;
+    font-size: 50px;
+    align-self: auto;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
+    font-style: Bold;
+    text-align: left;
+    font-family: Agency FB;
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame-ui-homeabout-frameiconmoon {
+    top: 24px;
+    left: 130.6085205078125px;
+    width: 22.862743377685547px;
+    height: 22.862743377685547px;
+    display: flex;
+    padding: 0;
+    position: absolute;
+    align-self: auto;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex-shrink: 1;
+    border-color: transparent;
+    border-style: none;
+    border-width: 0;
+    border-radius: 0px 0px 0px 0px;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: transparent;
+  }
+  .frame-ui-homeabout-vector3 {
+    left: -8px;
+    width: 23px;
+    bottom: -1px;
+    height: 23px;
+    position: absolute;
+  }
+  
