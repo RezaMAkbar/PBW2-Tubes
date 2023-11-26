@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\StokOpname;
+use App\Models\StokOpnameSpesifik;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class StokOpnamesDataTable extends DataTable
+class StokOpnameSpesifikDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -23,7 +24,8 @@ class StokOpnamesDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
         ->addColumn('action', function ($stokopname) {
-            return '<a href="' . route('stockOpname.spesifikStockOpname', $stokopname->sid) . '" class="btn btn-primary">View Spesifik</a>';
+            return '<a href="' . route('stockOpname.editStockOpname', $stokopname->sid) . '" class="btn btn-primary">Edit</a>
+            <a href="' . route('stockOpname.tambahStockOpname', $stokopname->sid) . '" class="btn btn-primary" style="margin-top: 5px;">Tambah</a>';
         })
             ->setRowId('id');
     }
@@ -37,17 +39,26 @@ class StokOpnamesDataTable extends DataTable
         ->select([
             'stok_opname.id as sid',
             'stok_opname.id_obat as sIdObat',
-            'stok_opname.tempat_simpan',
-            'stok_opname.tanggal_simpan',
-            'stok_opname.sisa_stock',
+            'stok_opname.tempat_simpan as so_tempat',
+            'stok_opname.tanggal_simpan as so_tanggal',
+            'stok_opname.sisa_stock as so_sisa',
             'stok_opname.keterangan',
-            'stok_opname.stok_keluar',
-            'obat.id',
+            'stok_opname.stok_keluar as so_keluar',
+            'obat.id as oId',
             'obat.nama_obat',
-            'obat.stock',
-            'obat.harga',
+            'obat.expired as o_exp',
+            'obat.no_batch as o_batch',
+            'detail_penerimaan.id as dp_id',
+            'detail_penerimaan.id_obat as dp_idObat',
+            'detail_penerimaan.stock_masuk as dp_masuk',
+            'detail_penerimaan.no_nota as dp_nota',
         ])
-        ->leftJoin('obat', 'stok_opname.id_obat', '=', 'obat.id');
+        ->leftJoin('obat', 'stok_opname.id_obat', '=', 'obat.id')
+            ->leftJoin('detail_penerimaan', function ($join) {
+                $join->on('stok_opname.id_obat', '=', 'detail_penerimaan.id_obat');
+            })
+            ->where('stok_opname.id', $this->stokOpnameId);
+        
     }
 
     /**
@@ -56,7 +67,7 @@ class StokOpnamesDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('stokopnames-table')
+                    ->setTableId('stokopnamespesifik-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -85,11 +96,21 @@ class StokOpnamesDataTable extends DataTable
                   ->addClass('text-center'),
             Column::make('sid')
             ->title('ID'),
-            Column::make('sIdObat')
-            ->title('ID Obat'),
+            Column::make('so_tanggal')
+            ->title('Tgl.'),
+            Column::make('dp_nota')
+            ->title('No. Nota'),
+            Column::make('o_batch')
+            ->title('No. Batch'),
+            Column::make('o_exp')
+            ->title('Exp.'),
             Column::make('nama_obat'),
-            Column::make('harga'),
-            Column::make('stock'),
+            Column::make('keterangan'),
+            Column::make('dp_masuk'),
+            Column::make('so_keluar')
+            ->title('Keluar'),
+            Column::make('so_sisa')
+            ->title('Sisa'),
         ];
     }
 
@@ -98,6 +119,13 @@ class StokOpnamesDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'StokOpnames_' . date('YmdHis');
+        return 'StokOpnameSpesifik_' . date('YmdHis');
+    }
+
+    protected $stokOpnameId;
+
+    public function setStokOpnameId($stokOpnameId)
+    {
+        $this->stokOpnameId = $stokOpnameId;
     }
 }

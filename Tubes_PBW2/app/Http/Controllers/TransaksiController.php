@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\UsersDataTable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\DataTables\DetailPenerimaanDataTable;
+use App\DataTables\PenjualanDataTable;
 
-class UsersController extends Controller
+class TransaksiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(UsersDataTable $dataTable)
+
+    public function indexTerima(DetailPenerimaanDataTable $penerimaanDataTable)
     {
-        return $dataTable->render('users.index');
+        return $penerimaanDataTable->render('transaksi.viewDetailTransaksiTerima');
     }
+
+    public function indexJual(PenjualanDataTable $penjualanDataTable)
+    {
+        return $penjualanDataTable->render('transaksi.viewDetailTransaksiJual');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -61,16 +68,5 @@ class UsersController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-    public function getUsers() {
-        $users = DB::table('users')
-            ->select(
-                'username',
-                'name',
-                'email',
-            )
-            ->orderBy('username', 'asc')
-            ->get();
-        return response()->json($users, 200);
     }
 }

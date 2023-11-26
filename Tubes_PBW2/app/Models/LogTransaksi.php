@@ -15,4 +15,19 @@ class LogTransaksi extends Model
         'id_penerimaan',
         'id_penjualan',
     ];
+
+    public function obat()
+    {
+        return $this->belongsTo(Obat::class, 'id_obat', 'id');
+    }
+
+    public function detailPenerimaan()
+    {
+        return $this->belongsTo(DetailPenerimaan::class, 'id_obat', 'id_obat');
+    }
+
+    public function penjualan()
+    {
+        return $this->belongsTo(Penjualan::class, 'id_obat', 'id_obat');
+    }
 }

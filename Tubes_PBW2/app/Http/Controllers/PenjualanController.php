@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PenjualanDataTable;
 use App\Models\Log;
 use App\Models\LogTransaksi;
 use App\Models\Obat;
 use App\Models\Penjualan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PenjualanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PenjualanDataTable $dataTable)
     {
-        //
+        return $dataTable->render('transaksi.viewDetailTransaksi');
     }
 
     /**
@@ -41,7 +43,7 @@ class PenjualanController extends Controller
             'usernamePenjualan' => ['required', 'string'],
             'tanggal_transaksi' => ['required', 'date'],
             'total_harga_penjualan' => ['required', 'integer'],
-            'id_obat' => ['required', 'integer'],
+            'id_obat_jual' => ['required', 'integer'],
             'total_barang' => ['required', 'integer'],
         ]);
     
@@ -50,17 +52,17 @@ class PenjualanController extends Controller
             'username' => $request->usernamePenjualan,
             'tanggal_transaksi' => $request->tanggal_transaksi,
             'total_harga' => $request->total_harga_penjualan,
-            'id_obat' => $request->id_obat,
+            'id_obat' => $request->id_obat_jual,
             'total_barang' => $request->total_barang,
         ]);
 
         LogTransaksi::create([
             'tipe' => 'penjualan',
-            'id_obat' => $request->id_obat,
+            'id_obat' => $request->id_obat_jual,
             'id_penjualan' => $penjualan->id,
         ]);
         
-        return redirect('/dashboard');
+        return redirect('/viewTransaksiJual');
     }
 
     /**
@@ -94,4 +96,21 @@ class PenjualanController extends Controller
     {
         //
     }
+
+    public function getPenjualan() {
+        $penjualan = DB::table('penjualan')
+            ->select(
+                'penjualan.id',
+                'penjualan.username',
+                'penjualan.tanggal_transaksi',
+                'penjualan.total_harga',
+                'penjualan.total_barang',
+                'penjualan.id_obat',
+                'obat.nama_obat',
+            )
+            ->leftJoin('obat', 'penjualan.id_obat', '=', 'obat.id')
+            ->orderBy('penjualan.id', 'asc')
+            ->get();
+        return response()->json($penjualan, 200);
+            }
 }

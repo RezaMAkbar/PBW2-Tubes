@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Obat extends Model
 {
@@ -11,7 +13,7 @@ class Obat extends Model
         return $this->hasMany(Image::class, 'id_obat');
     }
     protected $table = 'obat';
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
     protected $fillable = [
         'nama_obat',
         'stock',
@@ -20,4 +22,14 @@ class Obat extends Model
         'expired',
         'no_batch'
     ];
+
+    public function stokOpnames()
+    {
+        return $this->hasMany(StokOpname::class, 'id_obat', 'id');
+    }
+
+    public function logTransaksi()
+    {
+        return $this->hasMany(LogTransaksi::class, 'id_obat', 'id');
+    }
 }

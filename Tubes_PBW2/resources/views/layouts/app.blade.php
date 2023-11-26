@@ -74,12 +74,13 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <div class="dropdown-item non-clickable" >{{ Auth::user()->name }} ({{ Auth::user()->username }})</div>
-                                    <a class="dropdown-item {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">{{ __('Home') }}</a>
+                                    <a class="dropdown-item {{ request()->routeIs('dashboard') ? 'active' : '' }} custom-active-color" href="{{ route('dashboard') }}">{{ __('Home') }}</a>
                                     <a class="dropdown-item {{ request()->routeIs('obat.tambahObat') ? 'active' : '' }}" href="{{ route('obat.tambahObat') }}">{{ __('Tambah Obat') }}</a>
-                                    <!-- hanya untuk testing<a  class="dropdown-item {{ request()->routeIs('users.index') ? 'active' : '' }}" href="{{ route('users.index') }}">{{ __('Users') }}</a> -->
                                     <a class="dropdown-item {{ request()->routeIs('transaksi.transaksiObat') ? 'active' : '' }}" href="{{ route('transaksi.transaksiObat') }}">{{ __('Transaksi') }}</a>
+                                    <a class="dropdown-item {{ request()->routeIs('transaksi.viewDetailTransaksiTerima') ? 'active' : '' }}" href="{{ route('transaksi.viewDetailTransaksiTerima') }}">{{ __('Detail Transaksi Penerimaan') }}</a>
+                                    <a class="dropdown-item {{ request()->routeIs('transaksi.viewDetailTransaksiJual') ? 'active' : '' }}" href="{{ route('transaksi.viewDetailTransaksiJual') }}">{{ __('Detail Transaksi Penjualan') }}</a>
                                     <a class="dropdown-item {{ request()->routeIs('log.logTransaksi') ? 'active' : '' }}" href="{{ route('log.logTransaksi') }}">{{ __('Log Transaksi') }}</a>
-                                    <a class="dropdown-item {{ request()->routeIs('viewStockOpname') ? 'active' : '' }}" href="{{ route('viewStockOpname') }}">{{ __('stockOpname.viewStockOpname') }}</a>
+                                    <a class="dropdown-item {{ request()->routeIs('stockOpname.viewStockOpname') ? 'active' : '' }}" href="{{ route('stockOpname.viewStockOpname') }}">{{ __('Stock Opname') }}</a>
                                     <a class="dropdown-item {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">{{ __('About') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

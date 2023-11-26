@@ -20,9 +20,11 @@
 .non-clickable {
     pointer-events: none;
     user-select: none;
-    color: #e0e0e0; /* Adjust the color to indicate it's not clickable if needed*/
+    color: #969696; /* Adjust the color if needed*/
 }
 
 .dropdown-item.active {
-    color: blue; /* Adjust the color if needed*/
+    color: #ffffff; /* Adjust the color if needed for the active text*/
+    background-color: #3420e6; /* Adjust the color if needed for the active text background*/
 }
+

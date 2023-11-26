@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\StokOpname;
+use App\Models\DetailPenerimaan;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class StokOpnamesDataTable extends DataTable
+class DetailPenerimaanDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -22,32 +22,29 @@ class StokOpnamesDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-        ->addColumn('action', function ($stokopname) {
-            return '<a href="' . route('stockOpname.spesifikStockOpname', $stokopname->sid) . '" class="btn btn-primary">View Spesifik</a>';
-        })
+            ->addColumn('action', 'detailpenerimaan.action')
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(StokOpname $model): QueryBuilder
+    public function query(DetailPenerimaan $model): QueryBuilder
     {
         return $model->newQuery()
         ->select([
-            'stok_opname.id as sid',
-            'stok_opname.id_obat as sIdObat',
-            'stok_opname.tempat_simpan',
-            'stok_opname.tanggal_simpan',
-            'stok_opname.sisa_stock',
-            'stok_opname.keterangan',
-            'stok_opname.stok_keluar',
-            'obat.id',
-            'obat.nama_obat',
-            'obat.stock',
-            'obat.harga',
+            'detail_penerimaan.id as dp_id',
+            'detail_penerimaan.no_nota as dp_nota',
+            'detail_penerimaan.tanggal as dp_date',
+            'detail_penerimaan.username as dp_name',
+            'detail_penerimaan.harga_beli as dp_buyPrice',
+            'detail_penerimaan.total_harga as dp_totalPrice',
+            'detail_penerimaan.id_obat as dp_idObat',
+            'detail_penerimaan.stock_masuk as dp_stock',
+            'obat.id as oid',
+            'obat.nama_obat as o_nama'
         ])
-        ->leftJoin('obat', 'stok_opname.id_obat', '=', 'obat.id');
+        ->leftJoin('obat', 'detail_penerimaan.id_obat', '=', 'obat.id');
     }
 
     /**
@@ -56,7 +53,7 @@ class StokOpnamesDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('stokopnames-table')
+                    ->setTableId('detailpenerimaan-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -78,18 +75,29 @@ class StokOpnamesDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('sid')
-            ->title('ID'),
-            Column::make('sIdObat')
+            // Column::computed('action')
+            //       ->exportable(false)
+            //       ->printable(false)
+            //       ->width(60)
+            //       ->addClass('text-center'),
+            Column::make('dp_id')
+            ->title('ID Transaksi'),
+            Column::make('dp_idObat')
             ->title('ID Obat'),
-            Column::make('nama_obat'),
-            Column::make('harga'),
-            Column::make('stock'),
+            Column::make('o_nama')
+            ->title('Nama Obat'),
+            Column::make('dp_nota')
+            ->title('No. Nota'),
+            Column::make('dp_name')
+            ->title('Nama Penjaga'),
+            Column::make('dp_date')
+            ->title('Tanggal Transaksi'),
+            Column::make('dp_buyPrice')
+            ->title('Harga Beli'),
+            Column::make('dp_totalPrice')
+            ->title('Total Harga'),
+            Column::make('dp_stock')
+            ->title('Stok Masuk'),
         ];
     }
 
@@ -98,6 +106,8 @@ class StokOpnamesDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'StokOpnames_' . date('YmdHis');
+        return 'DetailPenerimaan_' . date('YmdHis');
     }
+
+    
 }

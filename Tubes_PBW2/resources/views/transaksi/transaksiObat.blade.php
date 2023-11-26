@@ -20,12 +20,12 @@
                             </div>
                         </div>
 
-                        <!-- Field for update -->
+                        <!-- Field for penerimaan -->
                         <div id="penerimaanSection" class="penerimaan-section">
                             <div class="row mb-3">
-                                <label for="id_obat" class="col-md-4 col-form-label text-md-end">{{ __('ID') }}</label>
+                                <label for="id_obat_nerima" class="col-md-4 col-form-label text-md-end">{{ __('ID') }}</label>
                                 <div class="col-md-6">
-                                    <select name="id_obat" id="id_obat" class="form-select">
+                                    <select name="id_obat_nerima" id="id_obat_nerima" class="form-select">
                                         @foreach($obatIds as $obatId)
                                             <option value="{{ $obatId }}">{{ $obatId }}</option>
                                         @endforeach
@@ -105,9 +105,9 @@
                         <div id="penjualanSection" class="penjualan-section" style="display: none;">
 
                             <div class="row mb-3">
-                                <label for="id_obat" class="col-md-4 col-form-label text-md-end">{{ __('ID') }}</label>
+                                <label for="id_obat_jual" class="col-md-4 col-form-label text-md-end">{{ __('ID') }}</label>
                                 <div class="col-md-6">
-                                    <select name="id_obat" id="id_obat" class="form-select">
+                                    <select name="id_obat_jual" id="id_obat_jual" class="form-select">
                                         @foreach($obatIds as $obatId)
                                             <option value="{{ $obatId }}">{{ $obatId }}</option>
                                         @endforeach

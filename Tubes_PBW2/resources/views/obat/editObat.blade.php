@@ -130,11 +130,13 @@
         </div>
     </div>
 </div>
-<script>document.addEventListener('DOMContentLoaded', function () {
+<script>
+document.addEventListener('DOMContentLoaded', function () {
     const updateRadio = document.getElementById('update');
     const deleteRadio = document.getElementById('delete');
     const updateSection = document.getElementById('updateSection');
     const deleteSection = document.getElementById('deleteSection');
+    const form = document.getElementById('form');
 
     updateRadio.addEventListener('change', function () {
         if (this.checked) {
@@ -153,6 +155,17 @@
             form.action = "{{ route('obat.deleteObat', $obat) }}"; // Change the form action for deleting
         }
     });
+    form.addEventListener('submit', function (event) {
+        if (deleteRadio.checked) {
+            if (!confirmDelete()) {
+                event.preventDefault();
+            }
+        }
+    });
+
+    function confirmDelete() {
+        return confirm("Apakah anda yaking ingin menghapus obat ini?");
+    }
 });
 </script>
 @endsection

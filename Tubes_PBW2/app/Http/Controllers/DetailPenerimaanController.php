@@ -7,6 +7,7 @@ use App\Models\LogTransaksi;
 use App\Models\Obat;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DetailPenerimaanController extends Controller
 {
@@ -42,7 +43,7 @@ class DetailPenerimaanController extends Controller
             'tanggal' => ['required', 'date'],
             'harga_beli' => ['required', 'integer'],
             'total_harga_penerimaan' => ['required', 'integer'],
-            'id_obat' => ['required', 'integer'],
+            'id_obat_nerima' => ['required', 'integer'],
             'stock_masuk' => ['required', 'integer'],
         ]);
     
@@ -53,19 +54,19 @@ class DetailPenerimaanController extends Controller
             'tanggal' => $request->tanggal,
             'harga_beli' => $request->harga_beli,
             'total_harga' => $request->total_harga_penerimaan,
-            'id_obat' => $request->id_obat,
+            'id_obat' => $request->id_obat_nerima,
             'stock_masuk' => $request->stock_masuk,
         ]);
 
         LogTransaksi::create([
             'tipe' => 'penerimaan',
-            'id_obat' => $request->id_obat,
+            'id_obat' => $request->id_obat_nerima,
             'id_penerimaan'=> $penerimaan->id,
         ]);
     
     
         
-        return redirect('/dashboard');
+        return redirect('/viewTransaksiTerima');
     }
 
     /**
@@ -99,4 +100,22 @@ class DetailPenerimaanController extends Controller
     {
         //
     }
+
+    public function getDetailPenerimaan() {
+        $dp = DB::table('detail_penerimaan')
+            ->select(
+                'detail_penerimaan.id',
+                'detail_penerimaan.no_nota',
+                'detail_penerimaan.username',
+                'detail_penerimaan.tanggal',
+                'detail_penerimaan.harga_beli',
+                'detail_penerimaan.stock_masuk',
+                'detail_penerimaan.id_obat',
+                'obat.nama_obat',
+            )
+            ->leftJoin('obat', 'detail_penerimaan.id_obat', '=', 'obat.id')
+            ->orderBy('detail_penerimaan.id', 'asc')
+            ->get();
+        return response()->json($dp, 200);
+            }
 }

@@ -34,7 +34,7 @@ class ObatDataTable extends DataTable
 
                 $html = '';
                 foreach ($images as $image) {
-                    $html .= '<img src=" storage/' . $image->path . '" border="0" width="40" class="img-rounded" align="center" />';
+                    $html .= '<img src="' . asset('storage/' . $image->path) . '" border="0" width="40" class="img-rounded" align="center" />';
                 }
 
                 return $html;
@@ -56,8 +56,9 @@ class ObatDataTable extends DataTable
             'obat.harga',
             DB::raw("DATE_FORMAT(obat.expired, '%d-%m-%Y') as expired"),
             'obat.no_batch',
-            DB::raw('(SELECT stok_opname.tempat_simpan FROM stok_opname WHERE stok_opname.id_obat = obat.id) as tempat_simpan'),
-        ]);
+            'stok_opname.tempat_simpan as so_tempat'
+        ])
+        ->leftJoin('stok_opname', 'obat.id', '=', 'stok_opname.id_obat');
     }
 
     /**
@@ -107,7 +108,8 @@ class ObatDataTable extends DataTable
                 ->title('Tanggal Masuk'),
             Column::make('expired'),
             Column::make('no_batch'),
-          //  Column::make('tempat_simpan'),
+            Column::make('so_tempat')
+                ->title('Tempad Simpan'),
         ];
     }
 

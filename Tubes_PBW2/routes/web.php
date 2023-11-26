@@ -8,6 +8,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StockOpname;
 use App\Http\Controllers\StokOpnameController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\APIController;
+use App\Http\Controllers\TransaksiController;
 use App\Models\DetailPenerimaan;
 use App\Models\LogTransaksi;
 use App\Models\Transaksi;
@@ -47,8 +49,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/transaksiBeli', [DetailPenerimaanController::class, 'store'])->name('transaksi.storeTerima');
     Route::post('/transaksiJual', [PenjualanController::class, 'store'])->name('transaksi.storeJual');
     Route::get('/logTransaksi', [LogTransaksiController::class, 'index'])->name('log.logTransaksi');
+    Route::get('/viewTransaksiTerima', [TransaksiController::class, 'indexTerima'])->name('transaksi.viewDetailTransaksiTerima');
+    Route::get('/viewTransaksiJual', [TransaksiController::class, 'indexJual'])->name('transaksi.viewDetailTransaksiJual');
 
-    Route::get('/stockOpname', [StokOpnameController::class, 'index'])->name('viewStockOpname');
+    Route::get('/stockOpname', [StokOpnameController::class, 'index'])->name('stockOpname.viewStockOpname');
+    Route::get('/spesifikStockOpname/{stokOpname}', [StokOpnameController::class, 'indexSpesifik'])->name('stockOpname.spesifikStockOpname');
+    Route::get('/editStockOpname/{stokOpname}', [StokOpnameController::class, 'show'])->name('stockOpname.editStockOpname');
+    Route::post('/updateStockOpname', [StokOpnameController::class, 'update'])->name('stockOpname.updateStockOpname');
+    Route::get('/tambahViewStockOpname/{stokOpname}', [StokOpnameController::class, 'create'])->name('stockOpname.tambahStockOpname');
+    Route::post('/tambahStockOpname', [StokOpnameController::class, 'store'])->name('stockOpname.addStockOpname');
 
     Route::get('/about', function () {
         return view('about');
@@ -57,6 +66,12 @@ Route::middleware('auth')->group(function () {
     //     return view('stockOpname.viewStockOpname');
     // })->name('viewStockOpname');
 });
+Route::get('callUserWithToken', [APIController::class, 'memanggilAPIUser']);
+Route::get('callObatWithToken', [APIController::class, 'memanggilAPIObat']);
+Route::get('callStockOpnameWithToken', [APIController::class, 'memanggilAPIStockOpname']);
+Route::get('callDetailPenerimaanWithToken', [APIController::class, 'memanggilAPIDetailPenerimaan']);
+Route::get('callPenjualanWithToken', [APIController::class, 'memanggilAPIPenjualan']);
+Route::get('callLogTransaksiWithToken', [APIController::class, 'memanggilAPILogTransaksi']);
 
 require __DIR__.'/auth.php';
 

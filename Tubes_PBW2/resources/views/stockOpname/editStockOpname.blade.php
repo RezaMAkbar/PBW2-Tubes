@@ -1,0 +1,97 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Edit Stok Opname') }}</div>
+
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('stockOpname.updateStockOpname', $stokOpname) }}">
+                            @csrf
+
+                            <input type="hidden" name="id" value="{{ $stokOpname->id }}">
+                            <div class="form-group row mb-3">
+                                <label for="tempat_simpan" class="col-md-4 col-form-label text-md-end">{{ __('Tempat Simpan') }}</label>
+                                <div class="col-md-6">
+                                    <input id="tempat_simpan" type="text" class="form-control @error('tempat_simpan') is-invalid @enderror" name="tempat_simpan" value="{{ $stokOpname->tempat_simpan }}" required>
+                                    @error('tempat_simpan')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label for="tanggal_simpan" class="col-md-4 col-form-label text-md-end">{{ __('Tanggal Simpan') }}</label>
+                                <div class="col-md-6">
+                                    <input id="tanggal_simpan" type="date" class="form-control @error('tanggal_simpan') is-invalid @enderror" name="tanggal_simpan" value="{{ $stokOpname->tanggal_simpan }}" required>
+                                    @error('tanggal_simpan')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label for="stok_keluar" class="col-md-4 col-form-label text-md-end">{{ __('Stok Keluar') }}</label>
+                                <div class="col-md-6">
+                                    <input id="stok_keluar" type="number" class="form-control @error('stok_keluar') is-invalid @enderror" name="stok_keluar" value="{{ $stokOpname->stok_keluar }}" required>
+                                    @error('stok_keluar')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label for="sisa_stock" class="col-md-4 col-form-label text-md-end">{{ __('Sisa Stock') }}</label>
+                                <div class="col-md-6">
+                                    <input id="sisa_stock" type="number" class="form-control @error('sisa_stock') is-invalid @enderror" name="sisa_stock" value="{{ $stokOpname->sisa_stock }}" required>
+                                    @error('sisa_stock')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <label for="keterangan" class="col-md-4 col-form-label text-md-end">{{ __('Keterangan') }}</label>
+                                <div class="col-md-6">
+                                    <input id="keterangan" type="text" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" value="{{ $stokOpname->keterangan }}" required>
+                                    @error('keterangan')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-5">
+                                <div class="col-md-6 offset-md-4">
+                                 <button type="submit" class="btn btn-primary mr-2">
+                                        {{ __('Update') }}
+                                    </button>
+                                    <button type="reset" class="btn btn-danger mx-2">
+                                        {{ __('Reset') }}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-end mt-4">
+                                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ url('/stockOpname') }}">
+                                    {{ __('Stock Opname') }}
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\DataTables\ObatDataTable;
 
 use App\Models\Obat;
+use App\Models\StokOpname;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ObatController extends Controller
 {
@@ -42,13 +44,18 @@ class ObatController extends Controller
         ]);
     
        
-        Obat::create([
+        $obat = Obat::create([
             'nama_obat' => $request->nama_obat,
             'stock' => $request->stock,
             'harga' => $request->harga,
             'tanggal_masuk' => $request->tanggal_masuk,
             'expired' => $request->expired,
             'no_batch' => $request->no_batch,
+        ]);
+
+        StokOpname::create([
+            'id_obat' => $obat->id,
+            'tanggal_simpan' => $request->tanggal_masuk,
         ]);
     
         
@@ -146,5 +153,23 @@ class ObatController extends Controller
         Obat::destroy($request->id); // Delete the record
     
         return redirect()->route('dashboard'); 
+    }
+
+    public function getObat() {
+        $obat = DB::table('obat')
+            ->select(
+                'obat.id',
+                'obat.nama_obat',
+                'obat.stock',
+                'obat.harga',
+                'obat.tanggal_masuk',
+                'obat.expired',
+                'obat.no_batch',
+                'images.name'
+            )
+            ->leftJoin('images', 'obat.id', '=', 'images.id_obat')
+            ->orderBy('obat.id', 'asc')
+            ->get();
+        return response()->json($obat, 200);
     }
 }
