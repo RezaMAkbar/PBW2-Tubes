@@ -22,7 +22,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-xl navbar-light custom-background-color shadow-sm">
             <div class="container">
-                <a class="navbar-brand text" href="{{ url('/') }}">
+                <a class="navbar-brand text" href="{{ url('/about') }}">
                     Medtrack
                 </a>
 
