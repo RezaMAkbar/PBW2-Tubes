@@ -41,7 +41,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="usernamePenerimaan" class="col-md-4 col-form-label text-md-end">{{ __('Username penjaga') }}</label>
+                                <label for="usernamePenerimaan" class="col-md-4 col-form-label text-md-end">{{ __('Nama pengguna penjaga') }}</label>
 
                                 <div class="col-md-6">
                                     <input list="usernames" id="usernamePenerimaan" type="text" class="form-control @error('usernamePenerimaan') is-invalid @enderror" name="usernamePenerimaan" value="{{ old('usernamePenerimaan') }}">
