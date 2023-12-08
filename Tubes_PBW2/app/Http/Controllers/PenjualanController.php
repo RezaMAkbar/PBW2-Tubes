@@ -56,13 +56,20 @@ class PenjualanController extends Controller
             'total_barang' => $request->total_barang,
         ]);
 
-        LogTransaksi::create([
-            'tipe' => 'penjualan',
-            'id_obat' => $request->id_obat_jual,
-            'id_penjualan' => $penjualan->id,
-        ]);
-        
-        return redirect('/viewTransaksiJual');
+        $obat = Obat::find($request->id_obat_jual);
+        if ($obat) {
+            // Supaya stock ga kurang dari 0
+            $newStock = max(0, $obat->stock - $request->total_barang);
+            $obat->update(['stock' => $newStock]);
+
+            LogTransaksi::create([
+                'tipe' => 'penjualan',
+                'id_obat' => $request->id_obat_jual,
+                'id_penjualan' => $penjualan->id,
+            ]);
+
+            return redirect('/viewTransaksiJual');
+        }
     }
 
     /**

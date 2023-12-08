@@ -100,7 +100,7 @@
                         <!-- Field for delete-->
                         <div id="deleteSection" class="delete-section" style="display: none;">
                             <div class="row mb-5">
-                                <label for="id" class="col-md-4 col-form-label text-md-end">{{ __('ID') }}</label>
+                                <label for="id" class="col-md-4 col-form-label text-md-end">{{ __('ID Obat') }}</label>
                                 <div class="col-md-6">
                                     <select name="id" id="id" class="form-select">
                                         @foreach($obatIds as $obatId)

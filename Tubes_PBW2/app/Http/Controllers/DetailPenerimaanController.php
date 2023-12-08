@@ -58,13 +58,19 @@ class DetailPenerimaanController extends Controller
             'stock_masuk' => $request->stock_masuk,
         ]);
 
-        LogTransaksi::create([
-            'tipe' => 'penerimaan',
-            'id_obat' => $request->id_obat_nerima,
-            'id_penerimaan'=> $penerimaan->id,
-        ]);
     
-    
+        $obat = Obat::find($request->id_obat_nerima);
+        if ($obat) {
+            // Supaya stock ga kurang dari 0
+            $newStock = max(0, $obat->stock + $request->stock_masuk);
+            $obat->update(['stock' => $newStock]);
+
+            LogTransaksi::create([
+                'tipe' => 'penerimaan',
+                'id_obat' => $request->id_obat_nerima,
+                'id_penerimaan' => $penerimaan->id,
+            ]);
+        }
         
         return redirect('/viewTransaksiTerima');
     }
