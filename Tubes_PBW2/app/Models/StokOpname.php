@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Http\Resources\Obat as ObatResource;
+use App\Http\Resources\TransaksiPenerimaan as TerimaResource;
 
 class StokOpname extends Model
 {

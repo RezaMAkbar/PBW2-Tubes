@@ -76,22 +76,27 @@ class StokOpnamesDataTable extends DataTable
      * Get the dataTable columns definition.
      */
     public function getColumns(): array
-    {
-        return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('sid')
-            ->title('ID'),
-            Column::make('sIdObat')
-            ->title('ID Obat'),
-            Column::make('nama_obat'),
-            Column::make('harga'),
-            Column::make('stock'),
-        ];
-    }
+{
+    return [
+        Column::computed('action')
+              ->exportable(false)
+              ->printable(false)
+              ->width(60)
+              ->addClass('text-center'),
+        Column::make('sid')
+              ->title('ID')
+              ->width(50),
+        Column::make('sIdObat')
+              ->title('ID Obat')
+              ->width(60),
+        Column::make('nama_obat')
+              ->width(150),
+        Column::make('harga')
+              ->width(80),
+        Column::make('stock')
+              ->width(80),
+    ];
+}
 
     /**
      * Get the filename for export.

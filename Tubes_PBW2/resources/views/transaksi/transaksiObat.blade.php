@@ -181,7 +181,8 @@
         </div>
     </div>
 </div>
-<script>document.addEventListener('DOMContentLoaded', function () {
+<script>
+document.addEventListener('DOMContentLoaded', function () {
     const penerimaanRadio = document.getElementById('penerimaan');
     const penjualanRadio = document.getElementById('penjualan');
     const penerimaanSection = document.getElementById('penerimaanSection');

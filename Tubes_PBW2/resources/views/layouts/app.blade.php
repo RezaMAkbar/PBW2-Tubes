@@ -74,7 +74,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <div class="dropdown-item non-clickable" >{{ Auth::user()->name }} ({{ Auth::user()->username }})</div>
-                                    <a class="dropdown-item {{ request()->routeIs('dashboard') ? 'active' : '' }} custom-active-color" href="{{ route('dashboard') }}">{{ __('Home') }}</a>
+                                    <a class="dropdown-item {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">{{ __('Home') }}</a>
                                     <a class="dropdown-item {{ request()->routeIs('obat.tambahObat') ? 'active' : '' }}" href="{{ route('obat.tambahObat') }}">{{ __('Tambah Obat') }}</a>
                                     <a class="dropdown-item {{ request()->routeIs('transaksi.transaksiObat') ? 'active' : '' }}" href="{{ route('transaksi.transaksiObat') }}">{{ __('Transaksi') }}</a>
                                     <a class="dropdown-item {{ request()->routeIs('transaksi.viewDetailTransaksiTerima') ? 'active' : '' }}" href="{{ route('transaksi.viewDetailTransaksiTerima') }}">{{ __('Detail Transaksi Penerimaan') }}</a>

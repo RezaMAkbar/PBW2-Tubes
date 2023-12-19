@@ -18,8 +18,8 @@ class Obat extends Model
         'nama_obat',
         'stock',
         'harga',
-        'tanggal_masuk',
         'expired',
+        'tanggal_masuk',
         'no_batch'
     ];
 
@@ -32,4 +32,9 @@ class Obat extends Model
     {
         return $this->hasMany(LogTransaksi::class, 'id_obat', 'id');
     }
+    public function detailPenerimaans()
+    {
+        return $this->hasMany(DetailPenerimaan::class, 'id_obat', 'id');
+    }
+
 }
