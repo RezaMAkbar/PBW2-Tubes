@@ -34,9 +34,9 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="no_nota" class="col-md-4 col-form-label text-md-end">{{ __('No Nota') }}</label>
+                                <label for="no_nota" class="col-md-4 col-form-label text-md-end">{{ __('No Nota (batas: 50)') }}</label>
                                 <div class="col-md-6">
-                                    <input id="no_nota" type="text" class="form-control" name="no_nota" value="{{ old('no_nota') }}">
+                                    <input id="no_nota" type="text" class="form-control" name="no_nota" value="{{ old('no_nota') }}"  maxlength="50">
                                 </div>
                             </div>
 

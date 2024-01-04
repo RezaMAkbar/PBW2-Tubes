@@ -38,7 +38,7 @@ class DetailPenerimaanController extends Controller
     {
         //
         $request->validate([
-            'no_nota' => ['required', 'string'],
+            'no_nota' => ['required', 'string', 'max:50'],
             'usernamePenerimaan' => ['required', 'string'],
             'tanggal' => ['required', 'date'],
             'harga_beli' => ['required', 'integer'],

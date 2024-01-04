@@ -81,23 +81,32 @@ class DetailPenerimaanDataTable extends DataTable
             //       ->width(60)
             //       ->addClass('text-center'),
             Column::make('dp_id')
-            ->title('ID Transaksi'),
+            ->title('ID Transaksi')
+            ->width(60),
             Column::make('dp_idObat')
-            ->title('ID Obat'),
+            ->title('ID Obat')
+            ->width(60),
             Column::make('o_nama')
-            ->title('Nama Obat'),
+            ->title('Nama Obat')
+            ->width(80),
             Column::make('dp_nota')
-            ->title('No. Nota'),
+            ->title('No. Nota')
+            ->width(90),
             Column::make('dp_name')
-            ->title('Nama Penjaga'),
+            ->title('Nama Penjaga')
+            ->width(60),
             Column::make('dp_date')
-            ->title('Tanggal Transaksi'),
+            ->title('Tanggal Transaksi')
+            ->width(60),
             Column::make('dp_buyPrice')
-            ->title('Harga Beli'),
+            ->title('Harga Beli')
+            ->width(60),
             Column::make('dp_totalPrice')
-            ->title('Total Harga'),
+            ->title('Total Harga')
+            ->width(60),
             Column::make('dp_stock')
-            ->title('Stok Masuk'),
+            ->title('Stok Masuk')
+            ->width(60),
         ];
     }
 
