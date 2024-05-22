@@ -22,9 +22,25 @@ class LogTransaksiDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
-            // ->addColumn('action', '')
-            ->setRowId('id');
+        $dataTable = new EloquentDataTable($query);
+        $dataTable->filter(function ($query) {
+            if ($keyword = request('search')['value']) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('log_transaksi.id', 'LIKE', "%{$keyword}%")
+                      ->orWhere('log_transaksi.id_obat', 'LIKE', "%{$keyword}%")
+                      ->orWhere('log_transaksi.tipe', 'LIKE', "%{$keyword}%")
+                      ->orWhere(DB::raw("DATE_FORMAT(detail_penerimaan.tanggal, '%d-%m-%Y')"), 'LIKE', "%{$keyword}%")
+                      ->orWhere(DB::raw("DATE_FORMAT(penjualan.tanggal_transaksi, '%d-%m-%Y')"), 'LIKE', "%{$keyword}%")
+                      ->orWhere('detail_penerimaan.stock_masuk', 'LIKE', "%{$keyword}%")
+                      ->orWhere('detail_penerimaan.total_harga', 'LIKE', "%{$keyword}%")
+                      ->orWhere('obat.nama_obat', 'LIKE', "%{$keyword}%")
+                      ->orWhere('penjualan.total_barang', 'LIKE', "%{$keyword}%")
+                      ->orWhere('penjualan.total_harga', 'LIKE', "%{$keyword}%");
+                });
+            }
+        });
+
+        return $dataTable->setRowId('sid');
     }
 
     /**

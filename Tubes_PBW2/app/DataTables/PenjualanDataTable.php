@@ -9,6 +9,7 @@ use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
@@ -21,9 +22,23 @@ class PenjualanDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
-            ->addColumn('action', 'penjualan.action')
-            ->setRowId('id');
+        $dataTable = new EloquentDataTable($query);
+        $dataTable->filter(function ($query) {
+            if ($keyword = request()->input('search.value')) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('penjualan.id', 'LIKE', "%{$keyword}%")
+                      ->orWhere('penjualan.username', 'LIKE', "%{$keyword}%")
+                      ->orWhere(DB::raw("DATE_FORMAT(penjualan.tanggal_transaksi, '%d-%m-%Y')"), 'LIKE', "%{$keyword}%")
+                      ->orWhere('penjualan.total_barang', 'LIKE', "%{$keyword}%")
+                      ->orWhere('penjualan.total_harga', 'LIKE', "%{$keyword}%")
+                      ->orWhere('penjualan.id_obat', 'LIKE', "%{$keyword}%")
+                      ->orWhere('obat.id', 'LIKE', "%{$keyword}%")
+                      ->orWhere('obat.nama_obat', 'LIKE', "%{$keyword}%");
+                });
+            }
+        });
+
+        return $dataTable->setRowId('id');
     }
 
     /**

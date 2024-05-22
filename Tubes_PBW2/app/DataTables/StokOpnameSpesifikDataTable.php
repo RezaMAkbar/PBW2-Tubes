@@ -12,6 +12,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Support\Facades\DB;
 
 class StokOpnameSpesifikDataTable extends DataTable
 {
@@ -22,12 +23,29 @@ class StokOpnameSpesifikDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
-        ->addColumn('action', function ($stokopname) {
+        $dataTable = new EloquentDataTable($query);
+        $dataTable->addColumn('action', function ($stokopname) {
             return '<a href="' . route('stockOpname.editStockOpname', $stokopname->sid) . '" class="btn btn-primary">Edit</a>
             <a href="' . route('stockOpname.tambahStockOpname', $stokopname->sid) . '" class="btn btn-primary" style="margin-top: 5px;">Tambah</a>';
-        })
-            ->setRowId('id');
+        });
+
+        // Custom search logic
+        $dataTable->filter(function ($query) {
+            if ($keyword = request('search')['value']) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('stok_opname.tempat_simpan', 'LIKE', "%{$keyword}%")
+                    ->orWhere(DB::raw("DATE_FORMAT(stok_opname.tanggal_simpan, '%d-%m-%Y')"), 'LIKE', "%{$keyword}%")
+                    ->orWhere('stok_opname.sisa_stock', 'LIKE', "%{$keyword}%")
+                    ->orWhere('stok_opname.keterangan', 'LIKE', "%{$keyword}%")
+                    ->orWhere('stok_opname.stok_keluar', 'LIKE', "%{$keyword}%")
+                    ->orWhere('obat.nama_obat', 'LIKE', "%{$keyword}%")
+                    ->orWhere('obat.stock', 'LIKE', "%{$keyword}%")
+                    ->orWhere('obat.harga', 'LIKE', "%{$keyword}%");
+                });
+            }
+        });
+
+        return $dataTable->setRowId('sid');
     }
 
     /**

@@ -24,23 +24,37 @@ class ObatDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
-            ->editColumn('action', function ($obat) {
-                return '<a href="/editObat/' . $obat->id . '" class="btn btn-primary">Edit</a>';
-            }) //edit column so that the button is shown
-            ->addColumn('image', function ($obat) {
-                // Fetch images for the meds
-                $images = Image::where('id_obat', $obat->id)->get();
+        $dataTable = new EloquentDataTable($query);
 
-                $html = '';
-                foreach ($images as $image) {
-                    $html .= '<img src="' . asset('storage/' . $image->path) . '" border="0" width="40" class="img-rounded" align="center" />';
-                }
+        $dataTable->editColumn('action', function ($obat) {
+            return '<a href="/editObat/' . $obat->id . '" class="btn btn-primary">Edit</a>';
+        });
 
-                return $html;
-            })
-            ->setRowId('id')
-            ->rawColumns(['action', 'image']); //for the image and button
+        $dataTable->addColumn('image', function ($obat) {
+            $images = Image::where('id_obat', $obat->id)->get();
+            $html = '';
+            foreach ($images as $image) {
+                $html .= '<img src="' . asset('storage/' . $image->path) . '" border="0" width="40" class="img-rounded" align="center" />';
+            }
+            return $html;
+        });
+
+        $dataTable->filter(function ($query) {
+            if ($keyword = request('search')['value']) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('obat.nama_obat', 'LIKE', "%{$keyword}%")
+                      ->orWhere('obat.stock', 'LIKE', "%{$keyword}%")
+                      ->orWhere('obat.harga', 'LIKE', "%{$keyword}%")
+                      ->orWhere(DB::raw("DATE_FORMAT(obat.tanggal_masuk, '%d-%m-%Y')"), 'LIKE', "%{$keyword}%")
+                      ->orWhere(DB::raw("DATE_FORMAT(obat.expired, '%d-%m-%Y')"), 'LIKE', "%{$keyword}%")
+                      ->orWhere('obat.no_batch', 'LIKE', "%{$keyword}%")
+                      ->orWhere('stok_opname.tempat_simpan', 'LIKE', "%{$keyword}%");
+                });
+            }
+        });
+
+        return $dataTable->setRowId('id')
+                         ->rawColumns(['action', 'image']);
     }
 
     /**

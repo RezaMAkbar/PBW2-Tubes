@@ -10,6 +10,7 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Services\DataTable;
 
 class DetailPenerimaanDataTable extends DataTable
@@ -21,9 +22,25 @@ class DetailPenerimaanDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
-            ->addColumn('action', 'detailpenerimaan.action')
-            ->setRowId('id');
+        $dataTable = new EloquentDataTable($query);
+        $dataTable->filter(function ($query) {
+            if ($keyword = request()->input('search.value')) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('detail_penerimaan.id', 'LIKE', "%{$keyword}%")
+                      ->orWhere('detail_penerimaan.no_nota', 'LIKE', "%{$keyword}%")
+                      ->orWhere('detail_penerimaan.username', 'LIKE', "%{$keyword}%")
+                      ->orWhere(DB::raw("DATE_FORMAT(detail_penerimaan.tanggal, '%d-%m-%Y')"), 'LIKE', "%{$keyword}%")
+                      ->orWhere('detail_penerimaan.stock_masuk', 'LIKE', "%{$keyword}%")
+                      ->orWhere('detail_penerimaan.total_harga', 'LIKE', "%{$keyword}%")
+                      ->orWhere('detail_penerimaan.harga_beli', 'LIKE', "%{$keyword}%")
+                      ->orWhere('detail_penerimaan.id_obat', 'LIKE', "%{$keyword}%")
+                      ->orWhere('obat.id', 'LIKE', "%{$keyword}%")
+                      ->orWhere('obat.nama_obat', 'LIKE', "%{$keyword}%");
+                });
+            }
+        });
+
+        return $dataTable->setRowId('id');
     }
 
     /**
